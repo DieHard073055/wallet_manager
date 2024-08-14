@@ -48,6 +48,8 @@ class WalletManager():
         records = self.sheet.get_all_records()
         all_data = list()
         for record in records:
+            if 'public_key' not in records or 'encrypted_mnemonic' not in records:
+                logger.critical("Please add a row above the google sheets, 'public_key', 'encrypted_mnemonic'")
             public_key = record['public_key']
             encrypted_mnemonic_str = record['encrypted_mnemonic']
             encrypted_mnemonic = bytes.fromhex(encrypted_mnemonic_str)
